@@ -7,6 +7,7 @@ var source = require("vinyl-source-stream");
 var glob = require('glob');
 var es = require('event-stream');
 var imagemin = require('gulp-imagemin');
+var eslint = require('gulp-eslint');
 
 gulp.task('sass:compile', function () {
   return gulp.src('./src/**/*.scss')
@@ -24,7 +25,14 @@ gulp.task('css:replace', ['sass:compile'], function() {
   .pipe(gulp.dest('../foo/static/css'));
 });
 
-gulp.task('js:compile', function(done) {
+gulp.task('eslint', () => {
+    return gulp.src(['./src/app/**/*.js'])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError(1));
+});
+
+gulp.task('js:compile', ['eslint'], function(done) {
     glob('./src/app/*.js', function(err, files) {
         if(err) done(err);
 
