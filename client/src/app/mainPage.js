@@ -1,3 +1,5 @@
+/* global $ */
+
 import MyClass from './components/MyComponent';
 
 console.log('main page');

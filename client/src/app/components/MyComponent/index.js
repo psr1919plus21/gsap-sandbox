@@ -1,3 +1,5 @@
+/* global $ */
+
 export default class MyClass {
   constructor() {
     this._getCounter = 0;
