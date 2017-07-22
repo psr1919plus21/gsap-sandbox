@@ -1,6 +1,6 @@
-@import '_vars';
-@import '../../app/components/MyComponent/_MyComponent';
+@import 'vars';
+@import '../../app/components/MyComponent/MyComponent';
 
-body {
-  background: $body-bg;
+p {
+  color: $color-green;
 }

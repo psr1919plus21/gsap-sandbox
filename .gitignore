@@ -92,6 +92,7 @@ ENV/
 settings_local.py
 .vagrant
 foo/static/
+
 *.sqlite3
 
 # Created by https://www.gitignore.io/api/osx

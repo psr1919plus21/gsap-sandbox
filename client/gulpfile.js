@@ -8,8 +8,16 @@ var glob = require('glob');
 var es = require('event-stream');
 var imagemin = require('gulp-imagemin');
 var eslint = require('gulp-eslint');
+var sassLint = require('gulp-sass-lint');
 
-gulp.task('sass:compile', function () {
+gulp.task('sass:lint', function () {
+  return gulp.src('./src/**/*.scss')
+    .pipe(sassLint())
+    .pipe(sassLint.format())
+    .pipe(sassLint.failOnError(1))
+});
+
+gulp.task('sass:compile', ['sass:lint'], function () {
   return gulp.src('./src/**/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(flatten())
