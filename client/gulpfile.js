@@ -62,7 +62,7 @@ gulp.task('js:replace', ['js:compile'], function() {
 });
 
 gulp.task('img', function() {
-  gulp.src('src/static/img/*')
+  gulp.src('src/static/img/**/*')
     .pipe(imagemin([
         imagemin.gifsicle({interlaced: true}),
         imagemin.jpegtran({progressive: true}),
@@ -70,8 +70,6 @@ gulp.task('img', function() {
     ]))
     .pipe(gulp.dest('./build/img'));
 });
-
-
 
 gulp.task('replace-static', function() {
   gulp.src('./build/**')
