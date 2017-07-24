@@ -1,8 +1,4 @@
-if (document.readyState === 'complete' || document.readyState !== 'loading') {
-  criticalCodeInint();
-} else {
-  document.addEventListener('DOMContentLoaded', criticalCodeInint);
-}
+criticalCodeInint();
 
 function criticalCodeInint() {
   var cats = document.querySelectorAll('.cat');

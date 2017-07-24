@@ -7,6 +7,10 @@
 <body>
     {% block content %}{% endblock %}
 
+    <!-- Critical scripts here -->
+    <script  src="{% static 'js/critical.js' %}"></script>
+
+    <!-- Common css here -->
     <link rel="stylesheet" href="{% static 'css/common.css' %}">
 </body>
 </html>
