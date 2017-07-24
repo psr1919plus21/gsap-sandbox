@@ -1,7 +1,7 @@
 {
-  "name": "cssanim",
+  "name": "foo",
   "version": "1.0.0",
-  "description": "css animations",
+  "description": "foo project",
   "main": "index.js",
   "scripts": {
     "build": "node_modules/.bin/gulp",

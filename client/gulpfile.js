@@ -1,3 +1,4 @@
+var project_name = require('./package.json').name;
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var flatten = require('gulp-flatten');
@@ -10,6 +11,7 @@ var imagemin = require('gulp-imagemin');
 var eslint = require('gulp-eslint');
 var sassLint = require('gulp-sass-lint');
 
+
 gulp.task('sass:lint', function () {
   return gulp.src('./src/**/*.scss')
     .pipe(sassLint())
@@ -21,26 +23,23 @@ gulp.task('sass:compile', ['sass:lint'], function () {
   return gulp.src('./src/**/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(flatten())
-    .pipe(gulp.dest('./build/css/'));
+    .pipe(gulp.dest(`../${project_name}/static/css`));
 });
 
-gulp.task('sass:watch', ['css:replace'], function () {
-  gulp.watch('./src/**/*.scss', ['css:replace']);
+gulp.task('sass:watch', ['sass:compile'], function () {
+  gulp.watch('./src/**/*.scss', ['sass:compile']);
 });
 
-gulp.task('css:replace', ['sass:compile'], function() {
-  gulp.src('./build/css/**')
-  .pipe(gulp.dest('../foo/static/css'));
-});
 
-gulp.task('eslint', () => {
+
+gulp.task('js:lint', () => {
     return gulp.src(['./src/app/**/*.js'])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError(1));
 });
 
-gulp.task('js:compile', ['eslint'], function(done) {
+gulp.task('js:compile', ['js:lint'], function(done) {
     glob('./src/app/*.js', function(err, files) {
         if(err) done(err);
 
@@ -54,19 +53,14 @@ gulp.task('js:compile', ['eslint'], function(done) {
           .bundle()
           .pipe(source(entry))
           .pipe(flatten())
-          .pipe(gulp.dest('./build/js'));
+          .pipe(gulp.dest(`../${project_name}/static/js`));
       })
     es.merge(tasks).on('end', done);
   });
 });
 
-gulp.task('js:watch', ['js:replace'], function() {
-  gulp.watch('./src/app/**/*.js', ['js:replace']);
-});
-
-gulp.task('js:replace', ['js:compile'], function() {
-  gulp.src('./build/js/**')
-  .pipe(gulp.dest('../foo/static/js'));
+gulp.task('js:watch', ['js:compile'], function() {
+  gulp.watch('./src/app/**/*.js', ['js:compile']);
 });
 
 gulp.task('img', function() {
@@ -76,16 +70,11 @@ gulp.task('img', function() {
         imagemin.jpegtran({progressive: true}),
         imagemin.optipng({optimizationLevel: 5})
     ]))
-    .pipe(gulp.dest('./build/img'));
+    .pipe(gulp.dest(`../${project_name}/static/img`));
 });
 
-gulp.task('replace-static', function() {
-  gulp.src('./build/**')
-  .pipe(gulp.dest('../foo/static'));
-});
+
 
 gulp.task('watch', ['sass:watch', 'js:watch']);
 
-gulp.task('default', ['sass:compile', 'js:compile', 'img'], function() {
-  gulp.run('replace-static');
-});
+gulp.task('default', ['sass:compile', 'js:compile', 'img']);
