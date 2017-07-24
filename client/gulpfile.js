@@ -11,7 +11,6 @@ var imagemin = require('gulp-imagemin');
 var eslint = require('gulp-eslint');
 var sassLint = require('gulp-sass-lint');
 
-
 gulp.task('sass:lint', function () {
   return gulp.src('./src/**/*.scss')
     .pipe(sassLint())
@@ -29,7 +28,6 @@ gulp.task('sass:compile', ['sass:lint'], function () {
 gulp.task('sass:watch', ['sass:compile'], function () {
   gulp.watch('./src/**/*.scss', ['sass:compile']);
 });
-
 
 
 gulp.task('js:lint', () => {
@@ -64,7 +62,7 @@ gulp.task('js:watch', ['js:compile'], function() {
 });
 
 gulp.task('img', function() {
-  gulp.src('src/static/img/**/*')
+  gulp.src('./src/static/img/**/*')
     .pipe(imagemin([
         imagemin.gifsicle({interlaced: true}),
         imagemin.jpegtran({progressive: true}),
@@ -74,7 +72,6 @@ gulp.task('img', function() {
 });
 
 
-
-gulp.task('watch', ['sass:watch', 'js:watch']);
+gulp.task('watch', ['sass:watch', 'js:watch', 'img']);
 
 gulp.task('default', ['sass:compile', 'js:compile', 'img']);
