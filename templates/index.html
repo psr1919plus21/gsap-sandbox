@@ -6,13 +6,11 @@
 {% endblock %}
 
 {% block content %}
-  <center>
-    <h1>Main page</h1>
-    <h2 class="critical-class">Critical styles make this red</h2>
-    <img class="cat" src="{% static 'img/cat.jpg' %}" alt="cat">
-    <p>Critical script set border-radius for cat.</p>
-    <div><a href="about">another page</a></div>
-  </center>
+  <div class="container">
+    <h1 class="container__title">GSAP</h1>
+    <img class="container__pic" src="{% static 'img/regular-show.png' %}" alt="">
+  </div>
+
 
   <script src="{% static 'js/vendors.js' %}" defer></script>
   <script src="{% static 'js/mainPage.js' %}" defer></script>

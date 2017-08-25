@@ -1,20 +1,18 @@
-/* global $ */
+/* global TweenMax */
 
 export default class MyClass {
-  constructor() {
-    this._getCounter = 0;
-    this._setCounter = 0;
-    this._foo = 'bar';
+  constructor(selector) {
+    this.el = document.querySelector(selector);
   }
 
-  get foo() {
-    return this._foo;
-
+  animate() {
+    TweenMax.to(this.el, 2, {
+       x: 500,
+       y: 300,
+       rotation: 360,
+       scale: 3,
+       ease:TweenMax.Back.easeOut
+    });
   }
 
-  set foo(val) {
-    this._foo = val;
-    return this._foo;
-  }
 }
-console.log($);

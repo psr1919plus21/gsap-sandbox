@@ -1,1 +1,3 @@
-window.$ = require('jquery');
+import {TweenMax} from 'gsap';
+
+window.TweenMax = TweenMax;
